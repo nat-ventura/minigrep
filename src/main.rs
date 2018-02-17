@@ -5,6 +5,8 @@ use std::io::prelude::*;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
+    let config = Config::new(&args);
+
     let (query, filename) = parse_config(&args);
 
     // let query = &args[1];
@@ -27,9 +29,11 @@ struct Config {
     filename: String,
 }
 
-fn parse_config(args: &[String]) -> Config {
-    let query = args[1].clone();
-    let filename = args[2].clone();
-    
-    Config { query, filename }
+impl Config {
+    fn new(args: &[String]) -> Config {
+        let query = args[1].clone();
+        let filename = args[2].clone();
+        
+        Config { query, filename }
+    }
 }
