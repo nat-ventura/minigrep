@@ -1,6 +1,7 @@
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
+use std::env;
 
 pub struct Config {
     pub query: String,
@@ -11,13 +12,15 @@ pub struct Config {
 impl Config {
     pub fn new(args: &[String]) -> Result<Config, &'static str> {
         if args.len() < 3 {
-            panic!("not enough arguments");
+            return Err("not enough arguments");
         }
 
         let query = args[1].clone();
         let filename = args[2].clone();
 
-        Ok(Config { query, filename })
+        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
+
+        Ok(Config { query, filename, case_sensitive })
     }
 }
 
