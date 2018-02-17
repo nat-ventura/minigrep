@@ -34,7 +34,8 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    vec![]
+    for line in contents.lines() {
+    }
 }
 
 #[cfg(test)]
