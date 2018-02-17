@@ -32,3 +32,22 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
     // that is, doesn't return a value we need
     Ok(())
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn one_result() {
+        let query = "duct";
+        let contents = "\
+        Rust:
+        safe, fast, productive.
+        Pick three.";
+
+        assert_eq!(
+            vec!["safe, fast, productive."],
+            search(query, contents)
+            );
+    }
+}
